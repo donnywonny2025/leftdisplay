@@ -1,28 +1,37 @@
 #!/bin/bash
-# Diagnostic - find what got installed and where
 echo ""
-echo "=== DIAGNOSTIC REPORT ==="
+echo "=== CHROMEBOOK CPU & SYSTEM INFO ==="
 echo ""
 
-echo ">> Checking ~/.local/bin/"
+echo ">> CPU Model:"
+cat /proc/cpuinfo | grep "model name" | head -1
+
+echo ""
+echo ">> CPU Flags (instruction sets):"
+cat /proc/cpuinfo | grep "flags" | head -1 | tr ' ' '\n' | grep -E "avx|sse|lm" | sort | tr '\n' ' '
+echo ""
+
+echo ""
+echo ">> Architecture:"
+uname -m
+
+echo ""
+echo ">> OS Info:"
+cat /etc/os-release | head -4
+
+echo ""
+echo ">> Checking ~/.local/bin/:"
 ls -la ~/.local/bin/ 2>/dev/null || echo "   (empty or doesn't exist)"
 
 echo ""
 echo ">> Searching for 'agy' anywhere..."
-find / -name "agy*" -type f 2>/dev/null | head -20
+find /home -name "agy*" -type f 2>/dev/null
+find /usr -name "agy*" -type f 2>/dev/null
+find /opt -name "agy*" -type f 2>/dev/null
 
 echo ""
-echo ">> Searching for 'antigravity' anywhere..."
-find / -name "antigravity*" -type f 2>/dev/null | head -20
-
-echo ""
-echo ">> Current PATH:"
-echo "$PATH"
-
-echo ""
-echo ">> What curl downloaded:"
-ls -la /tmp/agy* 2>/dev/null || echo "   (nothing in /tmp)"
+echo ">> Checking file type of agy binary:"
+file ~/.local/bin/agy 2>/dev/null || echo "   (not found)"
 
 echo ""
 echo "=== END REPORT ==="
-echo "Copy everything above and tell your Mac what you see."

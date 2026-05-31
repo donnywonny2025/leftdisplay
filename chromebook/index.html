@@ -339,6 +339,25 @@
             </div>
         </div>
 
+        <!-- SSH to Mac — Plan B -->
+        <div class="script-card" style="border-color: rgba(245, 158, 11, 0.3);">
+            <div class="card-header">
+                <div class="card-icon blue">🖥️</div>
+                <div class="card-title">Plan B: SSH Into Your Mac</div>
+            </div>
+            <div class="card-desc">
+                If "illegal instruction" error — your Chromebook CPU can't run the binary. Instead, use your Chromebook as a remote terminal into your Mac where Antigravity already works.
+            </div>
+            <div class="cmd-label">Paste into Terminal:</div>
+            <div class="cmd-block">
+                <span class="cmd-text">ssh jeffkerr@192.168.1.138</span>
+                <button class="copy-btn" onclick="copyCmd(this, 'ssh jeffkerr@192.168.1.138')">Copy</button>
+            </div>
+            <div class="card-desc" style="margin-bottom: 0; font-size: 0.85rem;">
+                Enter your Mac password when prompted. Then type <strong>agy</strong> to run Antigravity through your Mac. Both machines must be on the same WiFi.
+            </div>
+        </div>
+
         <!-- Tip -->
         <div class="script-card" style="opacity: 0.7;">
             <div class="card-header">
