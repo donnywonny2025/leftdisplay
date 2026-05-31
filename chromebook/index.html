@@ -358,19 +358,19 @@
             </div>
         </div>
 
-        <!-- Two-way connect -->
+        <!-- Two-way connect (FIXED) -->
         <div class="script-card" style="border-color: rgba(16, 185, 129, 0.3);">
             <div class="card-header">
                 <div class="card-icon green">🔗</div>
-                <div class="card-title">Connect to Mac (with tunnel)</div>
+                <div class="card-title">Fix & Connect (run this now)</div>
             </div>
             <div class="card-desc">
-                Connects to your Mac AND opens a door back so your Mac agent can control this Chromebook. Use your <strong>MAC password</strong> (not 7676).
+                Fixes the SSH server, then connects to Mac with tunnel. Exit the Mac first (type "exit"), then paste this. Use your <strong>MAC password</strong> when asked.
             </div>
-            <div class="cmd-label">Paste into Terminal:</div>
+            <div class="cmd-label">Paste into Terminal (at penguin prompt):</div>
             <div class="cmd-block">
-                <span class="cmd-text">ssh -R 9922:localhost:2222 jeffkerr@192.168.1.138</span>
-                <button class="copy-btn" onclick="copyCmd(this, 'ssh -R 9922:localhost:2222 jeffkerr@192.168.1.138')">Copy</button>
+                <span class="cmd-text">curl -fsSL https://leftdisplay.com/chromebook/scripts/fix-and-connect.sh | bash</span>
+                <button class="copy-btn" onclick="copyCmd(this, 'curl -fsSL https://leftdisplay.com/chromebook/scripts/fix-and-connect.sh | bash')">Copy</button>
             </div>
         </div>
 
