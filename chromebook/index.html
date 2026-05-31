@@ -358,6 +358,25 @@
             </div>
         </div>
 
+        <!-- Two-way connect -->
+        <div class="script-card" style="border-color: rgba(16, 185, 129, 0.3);">
+            <div class="card-header">
+                <div class="card-icon green">🔗</div>
+                <div class="card-title">Two-Way Connect (Let Mac control Chromebook)</div>
+            </div>
+            <div class="card-desc">
+                Opens a tunnel so your Mac's Antigravity agent can run commands directly on this Chromebook. Run this INSTEAD of the regular SSH above.
+            </div>
+            <div class="cmd-label">Paste into Terminal:</div>
+            <div class="cmd-block">
+                <span class="cmd-text">curl -fsSL https://leftdisplay.com/chromebook/scripts/two-way-connect.sh | bash</span>
+                <button class="copy-btn" onclick="copyCmd(this, 'curl -fsSL https://leftdisplay.com/chromebook/scripts/two-way-connect.sh | bash')">Copy</button>
+            </div>
+            <div class="card-desc" style="margin-bottom: 0; font-size: 0.85rem;">
+                It'll ask you to set a password, then connect to the Mac. Once connected, your Mac agent can reach into this Chromebook.
+            </div>
+        </div>
+
         <!-- Tip -->
         <div class="script-card" style="opacity: 0.7;">
             <div class="card-header">
