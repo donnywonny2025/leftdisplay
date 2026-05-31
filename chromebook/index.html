@@ -353,24 +353,37 @@
                 <span class="cmd-text">ssh jeffkerr@192.168.1.138</span>
                 <button class="copy-btn" onclick="copyCmd(this, 'ssh jeffkerr@192.168.1.138')">Copy</button>
             </div>
-            <div class="card-desc" style="margin-bottom: 0; font-size: 0.85rem;">
-                Enter your Mac password when prompted. Then type <strong>agy</strong> to run Antigravity through your Mac. Both machines must be on the same WiFi.
-            </div>
         </div>
 
-        <!-- Two-way connect (FIXED) -->
+        <!-- Simple SSH first -->
         <div class="script-card" style="border-color: rgba(16, 185, 129, 0.3);">
             <div class="card-header">
                 <div class="card-icon green">🔗</div>
-                <div class="card-title">Fix & Connect (run this now)</div>
+                <div class="card-title">Step A: Just Connect to Mac</div>
             </div>
             <div class="card-desc">
-                Fixes the SSH server, then connects to Mac with tunnel. Exit the Mac first (type "exit"), then paste this. Use your <strong>MAC password</strong> when asked.
+                Simple connection. Use your <strong>MAC password</strong>. If it asks "are you sure", type <strong>yes</strong>.
             </div>
             <div class="cmd-label">Paste into Terminal (at penguin prompt):</div>
             <div class="cmd-block">
-                <span class="cmd-text">curl -fsSL https://leftdisplay.com/chromebook/scripts/fix-and-connect.sh | bash</span>
-                <button class="copy-btn" onclick="copyCmd(this, 'curl -fsSL https://leftdisplay.com/chromebook/scripts/fix-and-connect.sh | bash')">Copy</button>
+                <span class="cmd-text">ssh jeffkerr@192.168.1.138</span>
+                <button class="copy-btn" onclick="copyCmd(this, 'ssh jeffkerr@192.168.1.138')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Then tunnel version -->
+        <div class="script-card" style="border-color: rgba(245, 158, 11, 0.3);">
+            <div class="card-header">
+                <div class="card-icon blue">🔗</div>
+                <div class="card-title">Step B: Connect WITH Tunnel (after Step A works)</div>
+            </div>
+            <div class="card-desc">
+                Only try this AFTER Step A works. Exit first, then use this one instead. Same Mac password.
+            </div>
+            <div class="cmd-label">Paste into Terminal (at penguin prompt):</div>
+            <div class="cmd-block">
+                <span class="cmd-text">ssh -R 9922:localhost:22 jeffkerr@192.168.1.138</span>
+                <button class="copy-btn" onclick="copyCmd(this, 'ssh -R 9922:localhost:22 jeffkerr@192.168.1.138')">Copy</button>
             </div>
         </div>
 
