@@ -291,14 +291,62 @@
             </div>
         </div>
 
-        <!-- Placeholder for future scripts -->
-        <div class="script-card" style="opacity: 0.5;">
+        <!-- Step 2: Refresh PATH and launch -->
+        <div class="script-card">
             <div class="card-header">
-                <div class="card-icon green">📦</div>
-                <div class="card-title">More scripts coming...</div>
+                <div class="card-icon green">▶️</div>
+                <div class="card-title">Step 2: Launch Antigravity</div>
             </div>
             <div class="card-desc">
-                Any tool, installer, or config you need — ask your Mac-side agent to push it here. It'll appear instantly.
+                Run this AFTER install completes. Refreshes your PATH and launches Antigravity.
+            </div>
+            <div class="cmd-label">Paste into Terminal:</div>
+            <div class="cmd-block">
+                <span class="cmd-text">source ~/.bashrc && agy</span>
+                <button class="copy-btn" onclick="copyCmd(this, 'source ~/.bashrc && agy')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Diagnostic -->
+        <div class="script-card">
+            <div class="card-header">
+                <div class="card-icon blue">🔍</div>
+                <div class="card-title">Troubleshoot: Run Diagnostic</div>
+            </div>
+            <div class="card-desc">
+                If "agy" says "command not found", run this. It scans your system and shows where everything installed.
+            </div>
+            <div class="cmd-label">Paste into Terminal:</div>
+            <div class="cmd-block">
+                <span class="cmd-text">curl -fsSL https://leftdisplay.com/chromebook/scripts/diagnostic.sh | bash</span>
+                <button class="copy-btn" onclick="copyCmd(this, 'curl -fsSL https://leftdisplay.com/chromebook/scripts/diagnostic.sh | bash')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Direct path fallback -->
+        <div class="script-card">
+            <div class="card-header">
+                <div class="card-icon purple">🛠️</div>
+                <div class="card-title">Fallback: Run by Full Path</div>
+            </div>
+            <div class="card-desc">
+                If nothing else works, try launching directly by full path.
+            </div>
+            <div class="cmd-label">Paste into Terminal:</div>
+            <div class="cmd-block">
+                <span class="cmd-text">~/.local/bin/agy</span>
+                <button class="copy-btn" onclick="copyCmd(this, '~/.local/bin/agy')">Copy</button>
+            </div>
+        </div>
+
+        <!-- Tip -->
+        <div class="script-card" style="opacity: 0.7;">
+            <div class="card-header">
+                <div class="card-icon green">💡</div>
+                <div class="card-title">Tip: Paste in Terminal</div>
+            </div>
+            <div class="card-desc">
+                On Chromebook Terminal, paste is <strong>Ctrl + Shift + V</strong> (not just Ctrl+V).
             </div>
         </div>
 
