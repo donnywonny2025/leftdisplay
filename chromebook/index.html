@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromebook Command Center — Left Display</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-deep: #0a0a1a;
+            --bg-card: #12122a;
+            --bg-card-hover: #1a1a3a;
+            --accent: #7c3aed;
+            --accent-glow: rgba(124, 58, 237, 0.3);
+            --success: #10b981;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.06);
+            --radius: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(124, 58, 237, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 100%, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #e2e8f0 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: var(--text-dim);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Script Cards */
+        .script-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .script-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .script-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(124, 58, 237, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .script-card:hover::before { opacity: 1; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .card-icon.purple { background: rgba(124, 58, 237, 0.15); }
+        .card-icon.green { background: rgba(16, 185, 129, 0.15); }
+        .card-icon.blue { background: rgba(59, 130, 246, 0.15); }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .card-desc {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Command Block */
+        .cmd-block {
+            background: #0d0d1f;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .cmd-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .cmd-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--success);
+            word-break: break-all;
+            user-select: all;
+            flex: 1;
+        }
+
+        .copy-btn {
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-btn:hover { background: #6d28d9; transform: scale(1.05); }
+        .copy-btn:active { transform: scale(0.95); }
+        .copy-btn.copied { background: var(--success); }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .step-num {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--accent);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .step strong { color: var(--text); }
+        .step span { color: var(--text-dim); }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+
+        footer .pulse {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 1.6rem; }
+            .cmd-block { flex-direction: column; align-items: stretch; }
+            .copy-btn { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">Left Display Network</div>
+            <h1>Chromebook Command Center</h1>
+            <p>One-click scripts deployed from your Mac. Open Terminal, paste a command, done.</p>
+        </header>
+
+        <!-- Install Antigravity -->
+        <div class="script-card">
+            <div class="card-header">
+                <div class="card-icon purple">🚀</div>
+                <div class="card-title">Install Google Antigravity</div>
+            </div>
+            <div class="card-desc">
+                Installs the Antigravity CLI, all Linux dependencies, and configures ChromeOS browser integration. Run once.
+            </div>
+            <div class="cmd-label">Open Terminal → paste this:</div>
+            <div class="cmd-block">
+                <span class="cmd-text">curl -fsSL https://leftdisplay.com/chromebook/scripts/install-antigravity.sh | bash</span>
+                <button class="copy-btn" onclick="copyCmd(this, 'curl -fsSL https://leftdisplay.com/chromebook/scripts/install-antigravity.sh | bash')">Copy</button>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <span>Open the <strong>Terminal</strong> app on your Chromebook</span>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <span>Paste the command above and hit <strong>Enter</strong></span>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <span>When done, type <strong>agy</strong> to launch Antigravity</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Placeholder for future scripts -->
+        <div class="script-card" style="opacity: 0.5;">
+            <div class="card-header">
+                <div class="card-icon green">📦</div>
+                <div class="card-title">More scripts coming...</div>
+            </div>
+            <div class="card-desc">
+                Any tool, installer, or config you need — ask your Mac-side agent to push it here. It'll appear instantly.
+            </div>
+        </div>
+
+        <footer>
+            <span class="pulse"></span>
+            Powered by Left Display · GitHub → Netlify auto-deploy
+        </footer>
+    </div>
+
+    <script>
+        function copyCmd(btn, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
